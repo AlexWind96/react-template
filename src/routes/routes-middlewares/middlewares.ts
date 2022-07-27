@@ -1,3 +1,9 @@
+export type MiddlewareType = {
+  type: string
+  condition: (arg: object) => boolean
+  redirectPath: string
+}
+
 export const ROUTE_MIDDLEWARE = {
   SUBSCRIPTIONS: {
     type: 'SUBSCRIPTIONS',
@@ -6,9 +12,7 @@ export const ROUTE_MIDDLEWARE = {
   },
 }
 
-export type MiddlewareType = typeof ROUTE_MIDDLEWARE.SUBSCRIPTIONS
-
-const hasSubscriptions = (user: any): boolean => {
+const hasSubscriptions = (user: object): boolean => {
   //Hard coded
   return false
 }
