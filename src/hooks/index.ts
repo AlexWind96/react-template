@@ -1,0 +1,1 @@
+export { useFromPath } from './useFromPath'
