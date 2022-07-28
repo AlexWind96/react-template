@@ -1,19 +1,32 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Anchor, Button, PasswordInput, Stack, Text, TextInput } from '@mantine/core'
+import { Alert, Anchor, Button, PasswordInput, Stack, Text, TextInput } from '@mantine/core'
 import * as React from 'react'
-import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import * as Yup from 'yup'
-import { Link, useNavigate } from 'react-router-dom'
-import { useAppDispatch } from '@/store'
-import { register as registerAction } from '@/features/auth'
+import { Link } from 'react-router-dom'
+import { ValidationErrors } from '@/types'
+import { ValidationsUtils } from '@/utils'
+import { useTranslation } from 'react-i18next'
 
-export const RegisterForm = () => {
+export type RegisterFormValues = {
+  email: string
+  password: string
+  name: string
+}
+
+type RegisterFormProps = {
+  onSubmit: (values: RegisterFormValues) => Promise<void>
+}
+
+export const RegisterForm = (props: RegisterFormProps) => {
   const {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors, isSubmitting },
-  } = useForm({
+  } = useForm<RegisterFormValues>({
     resolver: yupResolver(
       Yup.object().shape({
         email: Yup.string().required('This field is required'),
@@ -23,23 +36,28 @@ export const RegisterForm = () => {
     ),
     mode: 'onChange',
   })
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
-  async function onSubmit(values) {
+  const [alertError, setAlertError] = useState<string | null>(null)
+  const { t } = useTranslation()
+
+  const onSubmit: SubmitHandler<RegisterFormValues> = async (data) => {
     try {
-      const body = { ...values }
-      await dispatch(
-        registerAction({ email: body.email, password: body.password, name: body.name })
-      ).unwrap()
-      navigate('dashboard', { replace: true })
-    } catch (error) {
-      console.error(error)
+      await props.onSubmit(data)
+      reset()
+    } catch (err) {
+      const serverError = err as ValidationErrors
+      setAlertError(serverError?.message || t('error'))
+      ValidationsUtils.setServerSideErrors(serverError?.errors, setError)
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {alertError && (
+        <Alert color="red" mb={'sm'}>
+          {alertError}
+        </Alert>
+      )}
       <Stack>
         <TextInput
           {...register('name')}

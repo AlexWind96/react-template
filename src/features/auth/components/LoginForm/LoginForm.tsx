@@ -1,25 +1,31 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import {
-  Anchor,
-  Button,
-  PasswordInput,
-  Text,
-  TextInput,
-  useMantineColorScheme,
-} from '@mantine/core'
+import { Alert, Anchor, Button, PasswordInput, Text, TextInput } from '@mantine/core'
 import * as React from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import * as Yup from 'yup'
-import { useAppDispatch } from '@/store'
-import { Link, useNavigate } from 'react-router-dom'
-import { login } from '@/features/auth'
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { ValidationsUtils } from '@/utils'
+import { useTranslation } from 'react-i18next'
+import { ValidationErrors } from '@/types'
 
-export const LoginForm = () => {
+export type LoginFormValues = {
+  email: string
+  password: string
+}
+
+type LoginFormProps = {
+  onSubmit: (values: LoginFormValues) => Promise<void>
+}
+
+export const LoginForm = (props: LoginFormProps) => {
   const {
     register,
     handleSubmit,
+    setError,
+    reset,
     formState: { errors, isSubmitting },
-  } = useForm({
+  } = useForm<LoginFormValues>({
     resolver: yupResolver(
       Yup.object().shape({
         email: Yup.string().required('This field is required'),
@@ -28,27 +34,34 @@ export const LoginForm = () => {
     ),
     mode: 'onChange',
   })
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
-  async function onSubmit(values) {
+  const [alertError, setAlertError] = useState<string | null>(null)
+  const { t } = useTranslation()
+
+  const onSubmit: SubmitHandler<LoginFormValues> = async (data) => {
     try {
-      const body = { ...values }
-      await dispatch(login({ email: body.email, password: body.password })).unwrap()
-      navigate('dashboard', { replace: true })
-    } catch (error) {
-      console.log(error)
+      await props.onSubmit(data)
+      reset()
+    } catch (err) {
+      const serverError = err as ValidationErrors
+      setAlertError(serverError?.message || t('error'))
+      ValidationsUtils.setServerSideErrors(serverError?.errors, setError)
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {alertError && (
+        <Alert color="red" mb={'sm'}>
+          {alertError}
+        </Alert>
+      )}
       <TextInput
         {...register('email')}
         label="Email"
         placeholder="you@mantine.dev"
         required
-        error={errors.password?.message as React.ReactNode}
+        error={errors.email?.message as React.ReactNode}
       />
       <PasswordInput
         {...register('password')}

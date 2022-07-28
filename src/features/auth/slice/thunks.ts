@@ -1,29 +1,41 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { authAPI, LoginBody, RegistrationBody } from '@/features/auth'
 import { AxiosError } from 'axios'
+import { login, LoginCredentialsDTO } from '../api/login'
+import { getUser } from '@/features/auth/api/getUser'
+import { logOut } from '@/features/auth/api/logout'
+import { register, RegisterCredentialsDTO } from '../api/register'
+import { AuthUser } from '../types'
+import { ValidationErrors } from '@/types'
 
-export const login = createAsyncThunk<
+export const loginAction = createAsyncThunk<
   // Return type of the payload creator
-  { user: any },
+  { user: AuthUser },
   // First argument to the payload creator
-  LoginBody,
+  LoginCredentialsDTO,
   // Types for ThunkAPI
   {
-    rejectValue: AxiosError
+    rejectValue: ValidationErrors
   }
->('auth/login', async (data: LoginBody) => {
-  await authAPI.login(data)
+>('auth/login', async (data, { rejectWithValue }) => {
+  try {
+    await login(data)
 
-  const profileResponse = await authAPI.getProfile({
-    includes: ['company', 'department', 'settings'],
-  })
-
-  return {
-    user: profileResponse.data.data,
+    const profileResponse = await getUser({
+      includes: ['company', 'department', 'settings'],
+    })
+    return {
+      user: profileResponse.data.data,
+    }
+  } catch (err) {
+    const error = err as AxiosError<ValidationErrors>
+    if (!error.response) {
+      throw error
+    }
+    return rejectWithValue(error.response.data)
   }
 })
 
-export const logout = createAsyncThunk<
+export const logoutAction = createAsyncThunk<
   // Return type of the payload creator
   void,
   // First argument to the payload creator
@@ -33,22 +45,22 @@ export const logout = createAsyncThunk<
     rejectValue: AxiosError
   }
 >('auth/logout', async () => {
-  await authAPI.logOut()
+  await logOut()
 })
 
-export const register = createAsyncThunk<
+export const registerAction = createAsyncThunk<
   // Return type of the payload creator
-  { user: any },
+  { user: AuthUser },
   // First argument to the payload creator
-  RegistrationBody,
+  RegisterCredentialsDTO,
   // Types for ThunkAPI
   {
     rejectValue: AxiosError
   }
 >('auth/register', async (data) => {
-  await authAPI.register(data)
+  await register(data)
 
-  const profileResponse = await authAPI.getProfile({
+  const profileResponse = await getUser({
     includes: ['company', 'department', 'settings'],
   })
 
