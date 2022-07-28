@@ -4,13 +4,11 @@ import { Navigate } from 'react-router-dom'
 
 //Layout
 import { HomeLayout } from '@/components/layouts'
+import { NotFound, Error } from '@/pages'
 
 //pages
 const { Home } = lazyImport(() => import('@/pages'), 'Home')
-const { Contacts } = lazyImport(() => import('@/pages'), 'Contacts')
 const { About } = lazyImport(() => import('@/pages'), 'About')
-const { NotFound } = lazyImport(() => import('@/pages'), 'NotFound')
-const { Error } = lazyImport(() => import('@/pages'), 'Error')
 
 //config
 export const getPublicRoutes = () => {
@@ -30,10 +28,6 @@ export const getPublicRoutes = () => {
         {
           path: '/about',
           element: <About />,
-        },
-        {
-          path: '/contacts',
-          element: <Contacts />,
         },
       ],
     },

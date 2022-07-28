@@ -1,9 +1,7 @@
 import * as React from 'react'
 import { useFromPath } from '@/hooks'
 import { Navigate, Outlet } from 'react-router-dom'
-import { MiddlewareType, ROUTE_MIDDLEWARE } from '../routes-middlewares'
-
-const { SUBSCRIPTIONS } = ROUTE_MIDDLEWARE
+import { MiddlewareType, SUBSCRIPTIONS_MIDDLEWARE } from '../routes-middlewares'
 
 type ProtectedRouteProps = {
   middlewares: MiddlewareType[]
@@ -17,8 +15,8 @@ export const ProtectedRoute = ({ middlewares, user }: ProtectedRouteProps) => {
     return middlewares.some((middleware) => middleware.type === type)
   }
 
-  if (withMiddleware(SUBSCRIPTIONS.type) && SUBSCRIPTIONS.condition(user)) {
-    return <Navigate to={SUBSCRIPTIONS.redirectPath} state={{ from }} />
+  if (withMiddleware(SUBSCRIPTIONS_MIDDLEWARE.type) && SUBSCRIPTIONS_MIDDLEWARE.condition(user)) {
+    return <Navigate to={SUBSCRIPTIONS_MIDDLEWARE.redirectPath} state={{ from }} />
   }
 
   return <Outlet />

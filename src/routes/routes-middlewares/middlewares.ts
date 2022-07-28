@@ -4,12 +4,10 @@ export type MiddlewareType = {
   redirectPath: string
 }
 
-export const ROUTE_MIDDLEWARE = {
-  SUBSCRIPTIONS: {
-    type: 'SUBSCRIPTIONS',
-    condition: (user: object) => !hasSubscriptions(user),
-    redirectPath: 'subscription',
-  },
+export const SUBSCRIPTIONS_MIDDLEWARE: MiddlewareType = {
+  type: 'SUBSCRIPTIONS',
+  condition: (user: object) => !hasSubscriptions(user),
+  redirectPath: 'subscription',
 }
 
 const hasSubscriptions = (user: object): boolean => {

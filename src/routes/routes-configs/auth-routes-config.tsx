@@ -2,13 +2,12 @@ import React from 'react'
 import { lazyImport } from '@/utils/lazyImport'
 import { Navigate, Outlet } from 'react-router-dom'
 import { AuthLayout } from '@/components/layouts'
-
-//Layout
+import { NotFound } from '@/pages'
 
 //pages
 const { Login } = lazyImport(() => import('@/pages'), 'Login')
 const { Register } = lazyImport(() => import('@/pages'), 'Register')
-const { NotFound } = lazyImport(() => import('@/pages'), 'NotFound')
+
 //config
 export const getAuthRoutes = (isLoggedIn: boolean) => {
   return [

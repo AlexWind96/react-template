@@ -1,20 +1,21 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-import { Icon, Receipt2, Settings, SwitchHorizontal } from 'tabler-icons-react'
+import { Icon, Receipt2, Settings, SwitchHorizontal, User } from 'tabler-icons-react'
 
 import { ProtectedRoute } from '../ProtectedRoute'
-import { MiddlewareType, ROUTE_MIDDLEWARE } from '../routes-middlewares'
+import { MiddlewareType, SUBSCRIPTIONS_MIDDLEWARE } from '../routes-middlewares'
 
 import { lazyImport } from '@/utils/lazyImport'
 import { ROLE } from '@/features/auth'
 import { DashboardLayout } from '@/components/layouts'
+import { NotFound } from '@/pages'
 
 const { Dashboard } = lazyImport(() => import('@/pages'), 'Dashboard')
 const { Director } = lazyImport(() => import('@/pages'), 'Director')
 const { Protected } = lazyImport(() => import('@/pages'), 'Protected')
 const { Employee } = lazyImport(() => import('@/pages'), 'Employee')
 const { Subscription } = lazyImport(() => import('@/pages'), 'Subscription')
-const { NotFound } = lazyImport(() => import('@/pages'), 'NotFound')
+const { Profile } = lazyImport(() => import('@/pages'), 'Profile')
 
 export const getPrivateRoutes = (isLoggedIn: boolean, user: any) => {
   return [
@@ -89,7 +90,7 @@ const privateRoutes: PrivateRouteType[] = [
     path: 'protected',
     element: <Protected />,
     roles: [ROLE.Director, ROLE.Employee],
-    middlewares: [ROUTE_MIDDLEWARE.SUBSCRIPTIONS],
+    middlewares: [SUBSCRIPTIONS_MIDDLEWARE],
     navigation_label: 'Protected',
     navigation_icon: SwitchHorizontal,
   },
@@ -100,6 +101,14 @@ const privateRoutes: PrivateRouteType[] = [
     middlewares: [],
     navigation_label: 'Subscription',
     navigation_icon: SwitchHorizontal,
+  },
+  {
+    path: 'profile',
+    element: <Profile />,
+    roles: [ROLE.Director, ROLE.Employee],
+    middlewares: [],
+    navigation_label: 'Profile',
+    navigation_icon: User,
   },
 ]
 
