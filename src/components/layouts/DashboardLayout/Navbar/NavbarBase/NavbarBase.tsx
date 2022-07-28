@@ -1,22 +1,15 @@
 import { Anchor, Code, Group, Navbar, ScrollArea, Title } from '@mantine/core'
 import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Logout } from 'tabler-icons-react'
 
 import useStyles from './NavbarBase.styles'
-import { useAppDispatch } from '@/store'
-import { logout } from '@/features/auth'
 
 type NavbarBaseProps = {}
 
-export const NavbarBase = ({ data }) => {
+export const NavbarBase = ({ data, onLogout }) => {
   const { classes, cx } = useStyles()
-  const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-  const handleLogout = async () => {
-    await dispatch(logout()).unwrap()
-    navigate('/home', { replace: true })
-  }
+
   const links = data.map((item) => (
     <NavLink
       to={item.path}
@@ -43,7 +36,7 @@ export const NavbarBase = ({ data }) => {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-        <Anchor<'button'> className={classes.link} onClick={handleLogout}>
+        <Anchor<'button'> className={classes.link} onClick={onLogout}>
           <Logout className={classes.linkIcon} />
           <span>Logout</span>
         </Anchor>

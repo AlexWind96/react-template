@@ -1,9 +1,12 @@
-import { Center, Group, Navbar, Title } from '@mantine/core'
+import { Center, Group, Navbar, Title, UnstyledButton } from '@mantine/core'
 import React from 'react'
 
 import { NavbarLink } from './NavbarLink'
+import { Logout } from 'tabler-icons-react'
+import useStyles from './NavbarMinimal.styles'
 
-export const NavbarMinimal = ({ data }) => {
+export const NavbarMinimal = ({ data, onLogout }) => {
+  const { classes } = useStyles()
   const links = data.map((item) => (
     <NavbarLink
       label={item.navigation_label}
@@ -24,7 +27,11 @@ export const NavbarMinimal = ({ data }) => {
         </Group>
       </Navbar.Section>
       <Navbar.Section>
-        <Group direction="column" align="center" spacing={0}></Group>
+        <Group direction="column" align="center" spacing={0}>
+          <UnstyledButton className={classes.link} onClick={onLogout}>
+            <Logout />
+          </UnstyledButton>
+        </Group>
       </Navbar.Section>
     </Navbar>
   )

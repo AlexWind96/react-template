@@ -1,15 +1,24 @@
 import { AppShell, Container, Drawer, ScrollArea, Stack, useMantineTheme } from '@mantine/core'
 import { useMediaQuery, useToggle } from '@mantine/hooks'
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { Header } from './Header'
 import { NavbarBase, NavbarDrawer, NavbarMinimal } from './Navbar'
 import { LoadingScreen } from '@/components/elements'
+import { useAppDispatch } from '@/store'
+import { logoutAction } from '@/features/auth'
 
 export function DashboardLayout({ navbarLinks }) {
   const theme = useMantineTheme()
   const [isDrawerOpened, toggleDrawerOpened] = useToggle(false, [true, false])
   const isSmallerThenMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
+
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const handleLogout = async () => {
+    await dispatch(logoutAction()).unwrap()
+    navigate('/home', { replace: true })
+  }
 
   return (
     <AppShell
@@ -20,7 +29,11 @@ export function DashboardLayout({ navbarLinks }) {
       }}
       padding={0}
       navbar={
-        isSmallerThenMd ? <NavbarMinimal data={navbarLinks} /> : <NavbarBase data={navbarLinks} />
+        isSmallerThenMd ? (
+          <NavbarMinimal onLogout={handleLogout} data={navbarLinks} />
+        ) : (
+          <NavbarBase onLogout={handleLogout} data={navbarLinks} />
+        )
       }
     >
       <Drawer
@@ -30,7 +43,11 @@ export function DashboardLayout({ navbarLinks }) {
         size="md"
         withCloseButton={false}
       >
-        <NavbarDrawer closeDrawer={() => toggleDrawerOpened(false)} data={navbarLinks} />
+        <NavbarDrawer
+          onLogout={handleLogout}
+          closeDrawer={() => toggleDrawerOpened(false)}
+          data={navbarLinks}
+        />
       </Drawer>
       <Stack justify={'flex-start'} style={{ height: '100vh' }}>
         <Header toggleOpen={toggleDrawerOpened} opened={isDrawerOpened} />

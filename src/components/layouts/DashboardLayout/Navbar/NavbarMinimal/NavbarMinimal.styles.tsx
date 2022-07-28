@@ -10,7 +10,7 @@ export default createStyles((theme, _params) => {
       alignItems: 'center',
       justifyContent: 'center',
       color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
-
+      marginBottom: 4,
       '&:hover': {
         backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
       },

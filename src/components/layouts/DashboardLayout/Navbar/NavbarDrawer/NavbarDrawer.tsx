@@ -7,7 +7,7 @@ import useStyles from './NavbarDrawer.styles'
 
 type NavbarDrawerProps = {}
 
-export const NavbarDrawer = ({ data, closeDrawer }) => {
+export const NavbarDrawer = ({ data, closeDrawer, onLogout }) => {
   const { classes, cx } = useStyles()
 
   const links = data.map((item) => (
@@ -17,6 +17,7 @@ export const NavbarDrawer = ({ data, closeDrawer }) => {
       className={({ isActive }) =>
         isActive ? cx(classes.link, classes.linkActive) : cx(classes.link)
       }
+      onClick={closeDrawer}
     >
       <item.navigation_icon className={classes.linkIcon} />
       <span>{item.navigation_label}</span>
@@ -38,7 +39,7 @@ export const NavbarDrawer = ({ data, closeDrawer }) => {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-        <Anchor<'button'> className={classes.link} onClick={() => {}}>
+        <Anchor<'button'> className={classes.link} onClick={onLogout}>
           <Logout className={classes.linkIcon} />
           <span>Logout</span>
         </Anchor>
