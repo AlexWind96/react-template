@@ -7,6 +7,7 @@ import { NavbarBase, NavbarDrawer, NavbarMinimal } from './Navbar'
 import { LoadingScreen } from '@/components/elements'
 import { useAppDispatch } from '@/store'
 import { logoutAction } from '@/features/auth'
+import { PATH } from '@/routes/path'
 
 export function DashboardLayout({ navbarLinks }) {
   const theme = useMantineTheme()
@@ -17,7 +18,7 @@ export function DashboardLayout({ navbarLinks }) {
   const navigate = useNavigate()
   const handleLogout = async () => {
     await dispatch(logoutAction()).unwrap()
-    navigate('/home', { replace: true })
+    navigate(`/${PATH.home}`, { replace: true })
   }
 
   return (
