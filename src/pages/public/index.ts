@@ -1,5 +1,0 @@
-export { Home } from './Home'
-export { NotFound } from './404'
-export { About } from './About'
-export { Error } from './Error'
-export { Contacts } from './Contacts'

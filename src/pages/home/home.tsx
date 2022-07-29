@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Container, Overlay, Text, Title } from '@mantine/core'
 import { Link } from 'react-router-dom'
-import useStyles from './Home.styles'
+import useStyles from './home.styles'
 
 export const Home = () => {
   const { classes } = useStyles()
