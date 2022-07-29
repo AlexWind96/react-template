@@ -5,7 +5,7 @@ type useFromPathArgs = {
   defaultPath?: string
 }
 
-export const useFromPath = ({ defaultPath = '/' }: useFromPathArgs) => {
+export const useFromPath = ({ defaultPath = '/' }: useFromPathArgs = {}) => {
   const location = useLocation()
 
   return useMemo(() => {
