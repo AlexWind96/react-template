@@ -71,7 +71,7 @@ export const RegisterForm = (props: RegisterFormProps) => {
           label="Email"
           placeholder="you@mantine.dev"
           required
-          error={errors.password?.message as React.ReactNode}
+          error={errors.email?.message as React.ReactNode}
         />
         <PasswordInput
           {...register('password')}

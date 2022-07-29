@@ -55,16 +55,24 @@ export const registerAction = createAsyncThunk<
   RegisterCredentialsDTO,
   // Types for ThunkAPI
   {
-    rejectValue: AxiosError
+    rejectValue: ValidationErrors
   }
->('auth/register', async (data) => {
-  await register(data)
+>('auth/register', async (data, { rejectWithValue }) => {
+  try {
+    await register(data)
 
-  const profileResponse = await getUser({
-    includes: ['company', 'department', 'settings'],
-  })
+    const profileResponse = await getUser({
+      includes: ['company', 'department', 'settings'],
+    })
 
-  return {
-    user: profileResponse.data.data,
+    return {
+      user: profileResponse.data.data,
+    }
+  } catch (err) {
+    const error = err as AxiosError<ValidationErrors>
+    if (!error.response) {
+      throw error
+    }
+    return rejectWithValue(error.response.data)
   }
 })
