@@ -3,6 +3,7 @@ import { LoginForm, LoginFormValues } from '../LoginForm'
 import { useAppDispatch } from '@/store'
 import { useNavigate } from 'react-router-dom'
 import { loginAction } from '@/features/auth'
+import { PATH } from '@/routes/path'
 
 export const LoginContainer = () => {
   const dispatch = useAppDispatch()
@@ -10,7 +11,7 @@ export const LoginContainer = () => {
 
   const handleSubmit = async (values: LoginFormValues) => {
     await dispatch(loginAction(values)).unwrap()
-    navigate('dashboard', { replace: true })
+    navigate(`${PATH.dashboard}`, { replace: true })
   }
 
   return <LoginForm onSubmit={handleSubmit} />
