@@ -17,11 +17,9 @@ src
 |
 +-- lib               # re-exporting different libraries preconfigured for the application
 |
-+-- providers         # all of the application providers
-|
 +-- routes            # routes configuration
 |
-+-- stores            # global state stores
++-- store            # global state stores
 |
 |
 +-- types             # base types used across the application
@@ -32,7 +30,7 @@ src
 |
 +-- pages             # Pages
 |
-+-- pages             # Locales
++-- locales             # Locales objects
 |
 +-- consts             # shared global const
 ```
@@ -53,8 +51,6 @@ src/features/awesome-feature
 +-- hooks       # hooks scoped to a specific feature
 |
 +-- routes      # route components for a specific feature pages
-|
-+-- stores      # state stores for a specific feature
 |
 +-- types       # typescript types for TS specific feature domain
 |
