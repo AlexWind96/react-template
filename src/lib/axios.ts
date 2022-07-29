@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
-import { auth } from '@/features/auth'
+import { cleanAuthData } from '@/features/auth'
+import { startsWith } from '@/lib/lodash'
 
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
@@ -10,9 +11,22 @@ axios.interceptors.request.use(
       ...config,
       baseURL: BASE_URL,
       withCredentials: true,
-      paramsSerializer: (params: object) => qs.stringify(params, { encode: false }),
+      paramsSerializer: (params: object) => {
+        return qs.stringify(params, { encode: false })
+      },
       headers: { 'Content-Type': 'application/json', ...config.headers },
     }
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)
+axios.interceptors.request.use(
+  async (config) => {
+    if (startsWith(config.url, 'api/auth')) {
+      await axios.get('sanctum/csrf-cookie')
+    }
+    return config
   },
   (error) => {
     return Promise.reject(error)
@@ -33,7 +47,7 @@ axios.interceptors.response.use(
           console.log('Error - 401')
 
           if (window.store.getState().auth.isLoggedIn) {
-            window.store.dispatch(auth.cleanAuthData())
+            window.store.dispatch(cleanAuthData())
           }
 
           break
@@ -43,7 +57,7 @@ axios.interceptors.response.use(
         case 419:
           console.log('Error - 419')
 
-          window.store.dispatch(auth.cleanAuthData())
+          window.store.dispatch(cleanAuthData())
 
           window.location.href = '/'
 
