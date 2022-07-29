@@ -9,6 +9,7 @@ import { lazyImport } from '@/utils/lazyImport'
 import { ROLE } from '@/features/auth'
 import { DashboardLayout } from '@/components/layouts'
 import { NotFound } from '@/pages'
+import { PATH } from '../path'
 
 const { Dashboard } = lazyImport(() => import('@/pages'), 'Dashboard')
 const { Director } = lazyImport(() => import('@/pages'), 'Director')
@@ -20,12 +21,12 @@ const { Profile } = lazyImport(() => import('@/pages'), 'Profile')
 export const getPrivateRoutes = (isLoggedIn: boolean, user: any) => {
   return [
     {
-      path: '/app/*',
-      element: isLoggedIn ? <Outlet /> : <Navigate to={'/auth'} replace />,
+      path: `/${PATH.app}/*`,
+      element: isLoggedIn ? <Outlet /> : <Navigate to={`/${PATH.auth}`} replace />,
       children: [
         {
           index: true,
-          element: <Navigate to={'dashboard'} replace />,
+          element: <Navigate to={`${PATH.dashboard}`} replace />,
         },
         {
           element: <DashboardLayout navbarLinks={mapPrivateRoutes(user?.role)} />,
@@ -63,7 +64,7 @@ export type PrivateRouteType = {
 
 const privateRoutes: PrivateRouteType[] = [
   {
-    path: 'dashboard',
+    path: `${PATH.dashboard}`,
     element: <Dashboard />,
     roles: [ROLE.Director, ROLE.Employee],
     middlewares: [],
@@ -71,7 +72,7 @@ const privateRoutes: PrivateRouteType[] = [
     navigation_icon: Settings,
   },
   {
-    path: 'director',
+    path: `${PATH.director}`,
     element: <Director />,
     roles: [ROLE.Director],
     middlewares: [],
@@ -79,7 +80,7 @@ const privateRoutes: PrivateRouteType[] = [
     navigation_icon: Receipt2,
   },
   {
-    path: 'employee',
+    path: `${PATH.employee}`,
     element: <Employee />,
     roles: [ROLE.Employee],
     middlewares: [],
@@ -87,7 +88,7 @@ const privateRoutes: PrivateRouteType[] = [
     navigation_icon: SwitchHorizontal,
   },
   {
-    path: 'protected',
+    path: `${PATH.protected}`,
     element: <Protected />,
     roles: [ROLE.Director, ROLE.Employee],
     middlewares: [SUBSCRIPTIONS_MIDDLEWARE],
@@ -95,7 +96,7 @@ const privateRoutes: PrivateRouteType[] = [
     navigation_icon: SwitchHorizontal,
   },
   {
-    path: 'subscription',
+    path: `${PATH.subscription}`,
     element: <Subscription />,
     roles: [ROLE.Director, ROLE.Employee],
     middlewares: [],
@@ -103,7 +104,7 @@ const privateRoutes: PrivateRouteType[] = [
     navigation_icon: SwitchHorizontal,
   },
   {
-    path: 'profile',
+    path: `${PATH.profile}`,
     element: <Profile />,
     roles: [ROLE.Director, ROLE.Employee],
     middlewares: [],

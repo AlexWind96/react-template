@@ -5,6 +5,7 @@ import { Navigate } from 'react-router-dom'
 //Layout
 import { HomeLayout } from '@/components/layouts'
 import { NotFound, Error } from '@/pages'
+import { PATH } from '../path'
 
 //pages
 const { Home } = lazyImport(() => import('@/pages'), 'Home')
@@ -19,20 +20,20 @@ export const getPublicRoutes = () => {
       children: [
         {
           index: true,
-          element: <Navigate to={'/home'} replace />,
+          element: <Navigate to={`/${PATH.home}`} replace />,
         },
         {
-          path: '/home',
+          path: `/${PATH.home}`,
           element: <Home />,
         },
         {
-          path: '/about',
+          path: `/${PATH.about}`,
           element: <About />,
         },
       ],
     },
     {
-      path: '/error',
+      path: `/${PATH.error}`,
       element: <Error />,
     },
     {

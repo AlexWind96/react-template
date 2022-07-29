@@ -9,7 +9,7 @@ type ProtectedRouteProps = {
 }
 
 export const ProtectedRoute = ({ middlewares, user }: ProtectedRouteProps) => {
-  const from = useFromPath({})
+  const from = useFromPath()
 
   const withMiddleware = (type: string) => {
     return middlewares.some((middleware) => middleware.type === type)

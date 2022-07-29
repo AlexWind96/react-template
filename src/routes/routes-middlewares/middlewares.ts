@@ -1,3 +1,5 @@
+import { PATH } from '../path'
+
 export type MiddlewareType = {
   type: string
   condition: (arg: object) => boolean
@@ -7,7 +9,7 @@ export type MiddlewareType = {
 export const SUBSCRIPTIONS_MIDDLEWARE: MiddlewareType = {
   type: 'SUBSCRIPTIONS',
   condition: (user: object) => !hasSubscriptions(user),
-  redirectPath: 'subscription',
+  redirectPath: `${PATH.subscription}`,
 }
 
 const hasSubscriptions = (user: object): boolean => {

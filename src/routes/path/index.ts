@@ -1,0 +1,15 @@
+export const PATH = {
+  dashboard: 'dashboard',
+  home: 'home',
+  about: 'about',
+  error: 'error',
+  auth: 'auth',
+  login: 'login',
+  register: 'register',
+  director: 'director',
+  app: 'app',
+  subscription: 'subscription',
+  employee: 'employee',
+  protected: 'protected',
+  profile: 'profile',
+}
