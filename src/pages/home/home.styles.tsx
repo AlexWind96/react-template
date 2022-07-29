@@ -13,7 +13,7 @@ export default createStyles((theme) => ({
     height: 700,
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'flex-start',
     paddingBottom: theme.spacing.xl * 6,
     zIndex: 1,

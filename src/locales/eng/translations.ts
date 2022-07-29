@@ -1,5 +1,5 @@
 export const ENG = {
-  'hello.man': 'Hello man',
+  dashboard: 'Dashboard',
   'message.error-fallback': 'Error occurred',
   refresh: 'Refresh',
 }

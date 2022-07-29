@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { Container, Overlay, Text, Title } from '@mantine/core'
+import { Button, Container, Overlay, Text } from '@mantine/core'
 import { Link } from 'react-router-dom'
 import useStyles from './home.styles'
+import { PATH } from '@/routes/path'
 
 export const Home = () => {
   const { classes } = useStyles()
@@ -13,13 +14,19 @@ export const Home = () => {
         zIndex={0}
       />
       <Container className={classes.container}>
-        <Title className={classes.title}>A fully featured React components library</Title>
-        <Text className={classes.description} size="xl" mt="xl">
-          Build fully functional accessible web applications faster than ever – Mantine includes
-          more than 120 customizable components and hooks to cover you in any situation
+        <Text
+          component="h1"
+          align="center"
+          variant="gradient"
+          gradient={{ from: 'yellow', to: 'white', deg: 45 }}
+          weight={700}
+          style={{ fontFamily: 'Greycliff CF, sans-serif', fontSize: 56 }}
+        >
+          React Template
         </Text>
-
-        <Link to={'/auth'}>Get started</Link>
+        <Button component={Link} to={`/${PATH.auth}`}>
+          Get started
+        </Button>
       </Container>
     </div>
   )
