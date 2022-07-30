@@ -12,4 +12,5 @@ export const PATH = {
   employee: 'employee',
   protected: 'protected',
   profile: 'profile',
+  models: 'models',
 }
