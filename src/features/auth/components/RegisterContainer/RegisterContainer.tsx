@@ -10,7 +10,7 @@ export const RegisterContainer = () => {
   const navigate = useNavigate()
 
   const handleSubmit = async (values: RegisterFormValues) => {
-    await dispatch(registerAction(values)).unwrap()
+    await dispatch(registerAction.request(values))
     navigate(`${PATH.dashboard}`, { replace: true })
   }
 

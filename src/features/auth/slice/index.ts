@@ -1,2 +1,2 @@
 export * from './slice'
-export * from './thunks'
+export { authSaga, logoutAction, loginAction, registerAction } from './sagas'

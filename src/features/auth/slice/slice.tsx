@@ -1,6 +1,5 @@
 import { RootState } from '@/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { loginAction, logoutAction, registerAction } from './thunks'
 import { AuthUser } from '../types'
 
 interface AuthState {
@@ -17,30 +16,25 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setLoginStatus(state, action: PayloadAction<boolean>) {
-      state.isLoggedIn = action.payload
-    },
     cleanAuthData() {
       return initialState
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(loginAction.fulfilled, (state, action) => {
+    loginSuccess(state, action: PayloadAction<{ user: AuthUser }>) {
       state.isLoggedIn = true
       state.user = action.payload.user
-    })
-    builder.addCase(logoutAction.fulfilled, (state) => {
+    },
+    registerSuccess(state, action: PayloadAction<{ user: AuthUser }>) {
+      state.isLoggedIn = true
+      state.user = action.payload.user
+    },
+    logoutSuccess(state) {
       state.isLoggedIn = false
       state.user = null
-    })
-    builder.addCase(registerAction.fulfilled, (state, action) => {
-      state.isLoggedIn = true
-      state.user = action.payload.user
-    })
+    },
   },
 })
 
-export const { setLoginStatus, cleanAuthData } = authSlice.actions
+export const { cleanAuthData, loginSuccess, logoutSuccess, registerSuccess } = authSlice.actions
 
 export const selectAuthData = (state: RootState) => state.auth
 
