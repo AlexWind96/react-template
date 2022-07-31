@@ -18,9 +18,7 @@ export const loginAction = createPromiseAction(
   'auth/loginFailed'
 )<LoginCredentialsDTO, { user: AuthUser }, AxiosError<ValidationErrors>>()
 
-export type ILoginAction = PromiseAction<string, LoginCredentialsDTO, any>
-
-function* loginWorker(action: ILoginAction) {
+function* loginWorker(action: PromiseAction<string, LoginCredentialsDTO, any>) {
   try {
     yield call(login, action.payload)
     const profileResponse = yield call(getUser, {
