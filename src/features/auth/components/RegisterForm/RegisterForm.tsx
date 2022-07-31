@@ -53,7 +53,7 @@ export const RegisterForm = (props: RegisterFormProps) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {alertError && (
+      {alertError && !isSubmitting && (
         <Alert color="red" mb={'sm'}>
           {alertError}
         </Alert>
