@@ -4,7 +4,6 @@ import { Navigate } from 'react-router-dom'
 
 //Layout
 import { HomeLayout } from '@/components/layouts'
-import { NotFound, Error } from '@/pages'
 import { PATH } from '../path'
 
 //pages
@@ -15,7 +14,6 @@ const { About } = lazyImport(() => import('@/pages'), 'About')
 export const getPublicRoutes = () => {
   return [
     {
-      path: '/',
       element: <HomeLayout />,
       children: [
         {
@@ -31,14 +29,6 @@ export const getPublicRoutes = () => {
           element: <About />,
         },
       ],
-    },
-    {
-      path: `/${PATH.error}`,
-      element: <Error />,
-    },
-    {
-      path: '*',
-      element: <NotFound />,
     },
   ]
 }

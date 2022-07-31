@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { ValidationErrors } from '@/types'
 import { ValidationsUtils } from '@/utils'
 import { useTranslation } from 'react-i18next'
+import { PATH } from '@/routes/path'
 
 export type RegisterFormValues = {
   email: string
@@ -86,7 +87,7 @@ export const RegisterForm = (props: RegisterFormProps) => {
       </Button>
       <Text color="dimmed" size="sm" align="center" mt={'sm'}>
         Have an account yet?{' '}
-        <Anchor size={'sm'} component={Link} to={'/auth/login'}>
+        <Anchor size={'sm'} component={Link} to={`/${PATH.login}`}>
           Log in
         </Anchor>
       </Text>

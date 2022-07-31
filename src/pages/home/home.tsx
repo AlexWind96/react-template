@@ -24,7 +24,7 @@ export const Home = () => {
         >
           React Template
         </Text>
-        <Button component={Link} to={`/${PATH.auth}`}>
+        <Button component={Link} to={`/${PATH.login}`}>
           Get started
         </Button>
       </Container>

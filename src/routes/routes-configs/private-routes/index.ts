@@ -1,0 +1,1 @@
+export { getPrivateRoutes } from './config'

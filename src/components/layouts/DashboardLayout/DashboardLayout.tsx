@@ -18,7 +18,7 @@ export function DashboardLayout({ navbarLinks }) {
   const navigate = useNavigate()
   const handleLogout = async () => {
     await dispatch(logout.request())
-    navigate(`/${PATH.home}`, { replace: true })
+    navigate(`/${PATH.login}`, { replace: true })
   }
 
   return (

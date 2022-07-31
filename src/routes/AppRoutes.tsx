@@ -1,16 +1,12 @@
 import React from 'react'
 import { useRoutes } from 'react-router-dom'
 import { useAuth } from '@/features/auth/hooks'
-import { getAuthRoutes, getPrivateRoutes, getPublicRoutes } from './routes-configs'
+import { getAllRoutes } from './routes-configs'
 
 export const AppRoutes = () => {
   const { isLoggedIn, user } = useAuth()
 
-  const routes = useRoutes([
-    ...getPublicRoutes(),
-    ...getAuthRoutes(isLoggedIn),
-    ...getPrivateRoutes(isLoggedIn, user),
-  ])
+  const routes = useRoutes([...getAllRoutes(isLoggedIn, user)])
 
   return <>{routes}</>
 }

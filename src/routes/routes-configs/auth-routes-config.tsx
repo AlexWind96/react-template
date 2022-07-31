@@ -1,8 +1,8 @@
 import React from 'react'
 import { lazyImport } from '@/utils/lazyImport'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { AuthLayout } from '@/components/layouts'
-import { NotFound } from '@/pages'
+
 import { PATH } from '../path'
 
 //pages
@@ -13,34 +13,15 @@ const { Register } = lazyImport(() => import('@/pages'), 'Register')
 export const getAuthRoutes = (isLoggedIn: boolean) => {
   return [
     {
-      path: `/${PATH.auth}/*`,
-      element: !isLoggedIn ? <Outlet /> : <Navigate to={`/${PATH.app}`} replace />,
+      element: !isLoggedIn ? <AuthLayout /> : <Navigate to={`/${PATH.dashboard}`} replace />,
       children: [
         {
-          index: true,
-          element: <Navigate to={`${PATH.login}`} replace />,
+          path: `/${PATH.login}`,
+          element: <Login />,
         },
         {
-          element: <AuthLayout title={'Log in'} />,
-          children: [
-            {
-              path: `${PATH.login}`,
-              element: <Login />,
-            },
-          ],
-        },
-        {
-          element: <AuthLayout title={'Sign up'} />,
-          children: [
-            {
-              path: `${PATH.register}`,
-              element: <Register />,
-            },
-          ],
-        },
-        {
-          path: '*',
-          element: <NotFound />,
+          path: `/${PATH.register}`,
+          element: <Register />,
         },
       ],
     },
