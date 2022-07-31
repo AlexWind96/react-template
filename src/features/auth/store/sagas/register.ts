@@ -25,7 +25,7 @@ function* worker(action: PromiseAction<string, RegisterCredentialsDTO, any>) {
     })
 
     yield put(register.success({ user: profileResponse.data.data }))
-    resolvePromiseAction<string, unknown, { user: AuthUser }>(action, {
+    resolvePromiseAction(action, {
       user: profileResponse.data.data,
     })
   } catch (err) {
