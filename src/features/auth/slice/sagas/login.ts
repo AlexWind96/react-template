@@ -1,6 +1,4 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { login, LoginCredentialsDTO } from '@/features/auth/api/login'
-import { getUser } from '@/features/auth/api/getUser'
 import { AxiosError } from 'axios'
 import { ValidationErrors } from '@/types'
 import {
@@ -11,6 +9,7 @@ import {
 } from 'redux-saga-promise-actions'
 import { AuthUser } from '@/features/auth'
 import { loginSuccess } from '../slice'
+import { authAPI, LoginCredentialsDTO } from '../../api'
 
 export const loginAction = createPromiseAction(
   'auth/loginRequest',
@@ -18,10 +17,10 @@ export const loginAction = createPromiseAction(
   'auth/loginFailed'
 )<LoginCredentialsDTO, { user: AuthUser }, AxiosError<ValidationErrors>>()
 
-function* loginWorker(action: PromiseAction<string, LoginCredentialsDTO, any>) {
+function* login(action: PromiseAction<string, LoginCredentialsDTO, any>) {
   try {
-    yield call(login, action.payload)
-    const profileResponse = yield call(getUser, {
+    yield call(authAPI.login, action.payload)
+    const profileResponse = yield call(authAPI.getUser, {
       includes: ['company', 'department', 'settings'],
     })
 
@@ -39,5 +38,5 @@ function* loginWorker(action: PromiseAction<string, LoginCredentialsDTO, any>) {
 }
 
 export function* loginSaga() {
-  yield takeEvery(loginAction.request, loginWorker)
+  yield takeEvery(loginAction.request, login)
 }
