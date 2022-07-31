@@ -72,6 +72,10 @@ const privateRoutes: PrivateRouteType[] = [
   },
 ]
 
-export const mapPrivateRoutes = (role: ROLE) => {
+export const getPrivateRoutesByRole = (role: ROLE) => {
   return privateRoutes.filter((route) => route.roles.includes(role))
+}
+
+export const getAllPrivateRoutes = () => {
+  return privateRoutes
 }

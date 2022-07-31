@@ -4,7 +4,7 @@ import { DashboardLayout } from '@/components/layouts'
 import { ProtectedRoute } from '../../ProtectedRoute'
 import { PATH } from '../../path'
 import { mapNavbarLinks } from './navbar-links'
-import { mapPrivateRoutes } from './routes'
+import { getAllPrivateRoutes, getPrivateRoutesByRole } from './routes'
 
 export const getPrivateRoutes = (isLoggedIn: boolean, user: any) => {
   return [
@@ -14,7 +14,7 @@ export const getPrivateRoutes = (isLoggedIn: boolean, user: any) => {
       ) : (
         <Navigate to={`/${PATH.login}`} replace />
       ),
-      children: mapPrivateRoutes(user?.role).map((route, index) => {
+      children: getPrivateRoutesByRole(user?.role).map((route, index) => {
         return {
           key: `${index}-${route.path}`,
           element: <ProtectedRoute user={user} middlewares={route.middlewares} />,
@@ -27,5 +27,13 @@ export const getPrivateRoutes = (isLoggedIn: boolean, user: any) => {
         }
       }),
     },
+    //When user is not log in, and prevent show 404 page
+    ...getAllPrivateRoutes().map((route, index) => {
+      return {
+        key: `${index}-${route.path}`,
+        path: route.path,
+        element: <Navigate to={`/${PATH.login}`} replace />,
+      }
+    }),
   ]
 }

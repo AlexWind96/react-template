@@ -13,7 +13,7 @@ interface NavbarLinkProps {
 export function NavbarLink({ icon: Icon, label, path }: NavbarLinkProps) {
   const { classes, cx } = useStyles()
 
-  const match = useMatch(`app/${path}`)
+  const match = useMatch(`/${path}/*`)
 
   return (
     <Tooltip label={label} position="right" withArrow transitionDuration={0}>
