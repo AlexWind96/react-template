@@ -1,6 +1,7 @@
 import { RootState } from '@/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AuthUser } from '../types'
+import { AUTH_LOGIN_SUCCESS, AUTH_LOGOUT_SUCCESS, AUTH_REGISTER_SUCCESS } from './sagas'
 
 interface AuthState {
   isLoggedIn: boolean
@@ -19,22 +20,24 @@ const authSlice = createSlice({
     cleanAuthData() {
       return initialState
     },
-    loginSuccess(state, action: PayloadAction<{ user: AuthUser }>) {
+  },
+  extraReducers: {
+    [AUTH_LOGIN_SUCCESS]: (state, action: PayloadAction<{ user: AuthUser }>) => {
       state.isLoggedIn = true
       state.user = action.payload.user
     },
-    registerSuccess(state, action: PayloadAction<{ user: AuthUser }>) {
-      state.isLoggedIn = true
-      state.user = action.payload.user
-    },
-    logoutSuccess(state) {
+    [AUTH_LOGOUT_SUCCESS]: (state) => {
       state.isLoggedIn = false
       state.user = null
+    },
+    [AUTH_REGISTER_SUCCESS]: (state, action: PayloadAction<{ user: AuthUser }>) => {
+      state.isLoggedIn = true
+      state.user = action.payload.user
     },
   },
 })
 
-export const { cleanAuthData, loginSuccess, logoutSuccess, registerSuccess } = authSlice.actions
+export const { cleanAuthData } = authSlice.actions
 
 export const selectAuthData = (state: RootState) => state.auth
 

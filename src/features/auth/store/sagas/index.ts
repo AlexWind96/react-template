@@ -7,6 +7,8 @@ export function* authSaga() {
   yield all([fork(loginSaga), fork(logoutSaga), fork(registerSaga)])
 }
 
-export { loginAction } from './login'
-export { logoutAction } from './logout'
-export { registerAction } from './register'
+export { login } from './login'
+export { logout } from './logout'
+export { register } from './register'
+
+export * from './actionTypes'

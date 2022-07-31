@@ -8,23 +8,23 @@ import {
   resolvePromiseAction,
 } from 'redux-saga-promise-actions'
 import { AuthUser } from '@/features/auth'
-import { loginSuccess } from '../slice'
 import { authAPI, LoginCredentialsDTO } from '../../api'
+import { AUTH_LOGIN_FAILED, AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS } from './actionTypes'
 
-export const loginAction = createPromiseAction(
-  'auth/loginRequest',
-  loginSuccess.type,
-  'auth/loginFailed'
-)<LoginCredentialsDTO, { user: AuthUser }, AxiosError<ValidationErrors>>()
+export const login = createPromiseAction(AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILED)<
+  LoginCredentialsDTO,
+  { user: AuthUser },
+  AxiosError<ValidationErrors>
+>()
 
-function* login(action: PromiseAction<string, LoginCredentialsDTO, any>) {
+function* worker(action: PromiseAction<string, LoginCredentialsDTO, any>) {
   try {
     yield call(authAPI.login, action.payload)
     const profileResponse = yield call(authAPI.getUser, {
       includes: ['company', 'department', 'settings'],
     })
 
-    yield put(loginAction.success({ user: profileResponse.data.data }))
+    yield put(login.success({ user: profileResponse.data.data }))
     resolvePromiseAction<string, unknown, { user: AuthUser }>(action, {
       user: profileResponse.data.data,
     })
@@ -38,5 +38,5 @@ function* login(action: PromiseAction<string, LoginCredentialsDTO, any>) {
 }
 
 export function* loginSaga() {
-  yield takeEvery(loginAction.request, login)
+  yield takeEvery(login.request, worker)
 }

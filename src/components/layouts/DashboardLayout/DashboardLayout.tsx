@@ -6,7 +6,7 @@ import { Header } from './Header'
 import { NavbarBase, NavbarDrawer, NavbarMinimal } from './Navbar'
 import { LoadingScreen } from '@/components/elements'
 import { useAppDispatch } from '@/store'
-import { logoutAction } from '@/features/auth/slice'
+import { logout } from '@/features/auth'
 import { PATH } from '@/routes/path'
 
 export function DashboardLayout({ navbarLinks }) {
@@ -17,7 +17,7 @@ export function DashboardLayout({ navbarLinks }) {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const handleLogout = async () => {
-    await dispatch(logoutAction.request())
+    await dispatch(logout.request())
     navigate(`/${PATH.home}`, { replace: true })
   }
 

@@ -8,23 +8,23 @@ import {
   resolvePromiseAction,
 } from 'redux-saga-promise-actions'
 import { AuthUser } from '@/features/auth'
-import { registerSuccess } from '../slice'
 import { authAPI, RegisterCredentialsDTO } from '../../api'
+import { AUTH_REGISTER_FAILED, AUTH_REGISTER_REQUEST, AUTH_REGISTER_SUCCESS } from './actionTypes'
 
-export const registerAction = createPromiseAction(
-  'auth/registerRequest',
-  registerSuccess.type,
-  'auth/registerFailed'
+export const register = createPromiseAction(
+  AUTH_REGISTER_REQUEST,
+  AUTH_REGISTER_SUCCESS,
+  AUTH_REGISTER_FAILED
 )<RegisterCredentialsDTO, { user: AuthUser }, AxiosError<ValidationErrors>>()
 
-function* register(action: PromiseAction<string, RegisterCredentialsDTO, any>) {
+function* worker(action: PromiseAction<string, RegisterCredentialsDTO, any>) {
   try {
     yield call(authAPI.register, action.payload)
     const profileResponse = yield call(authAPI.getUser, {
       includes: ['company', 'department', 'settings'],
     })
 
-    yield put(registerAction.success({ user: profileResponse.data.data }))
+    yield put(register.success({ user: profileResponse.data.data }))
     resolvePromiseAction<string, unknown, { user: AuthUser }>(action, {
       user: profileResponse.data.data,
     })
@@ -38,5 +38,5 @@ function* register(action: PromiseAction<string, RegisterCredentialsDTO, any>) {
 }
 
 export function* registerSaga() {
-  yield takeEvery(registerAction.request, register)
+  yield takeEvery(register.request, worker)
 }

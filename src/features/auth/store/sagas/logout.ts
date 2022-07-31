@@ -2,19 +2,19 @@ import { call } from 'redux-saga/effects'
 import { createPromiseAction } from 'redux-saga-promise-actions'
 import { takeEveryPromiseAction } from 'redux-saga-promise-actions/effects'
 import { AxiosError } from 'axios'
-import { logoutSuccess } from '../slice'
 import { authAPI } from '@/features/auth/api'
+import { AUTH_LOGOUT_FAILED, AUTH_LOGOUT_REQUEST, AUTH_LOGOUT_SUCCESS } from './actionTypes'
 
-export const logoutAction = createPromiseAction(
-  'auth/logoutRequest',
-  logoutSuccess.type,
-  'auth/logoutFail'
+export const logout = createPromiseAction(
+  AUTH_LOGOUT_REQUEST,
+  AUTH_LOGOUT_SUCCESS,
+  AUTH_LOGOUT_FAILED
 )<undefined, any, AxiosError>()
 
-function* logout() {
+function* worker() {
   yield call(authAPI.logOut)
 }
 
 export function* logoutSaga() {
-  yield takeEveryPromiseAction(logoutAction, logout)
+  yield takeEveryPromiseAction(logout, worker)
 }
