@@ -1,9 +1,9 @@
 import React from 'react'
 import { ROLE } from '@/features/auth'
-import { MiddlewareType, SUBSCRIPTIONS_MIDDLEWARE } from '../../routes-middlewares'
-import { PATH } from '@/routes/path'
 import { Model } from '@/features/model/pages'
+import { PATH } from '@/routes/path'
 import { lazyImport } from '@/utils/lazyImport'
+import { MiddlewareType, SUBSCRIPTIONS_MIDDLEWARE } from '../../routes-middlewares'
 
 const { Dashboard } = lazyImport(() => import('@/pages'), 'Dashboard')
 const { Director } = lazyImport(() => import('@/pages'), 'Director')

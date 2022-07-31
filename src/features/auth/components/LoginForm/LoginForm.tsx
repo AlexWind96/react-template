@@ -1,14 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Alert, Anchor, Button, PasswordInput, Text, TextInput } from '@mantine/core'
 import * as React from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import * as Yup from 'yup'
-import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { ValidationsUtils } from '@/utils'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { ValidationErrors } from '@/types'
+import { Link } from 'react-router-dom'
+import * as Yup from 'yup'
+import { Alert, Anchor, Button, PasswordInput, Text, TextInput } from '@mantine/core'
 import { PATH } from '@/routes/path'
+import { ValidationErrors } from '@/types'
+import { ValidationsUtils } from '@/utils'
 
 export type LoginFormValues = {
   email: string

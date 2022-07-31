@@ -1,14 +1,14 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
 import { AxiosError } from 'axios'
-import { ValidationErrors } from '@/types'
 import {
-  createPromiseAction,
   PromiseAction,
+  createPromiseAction,
   rejectPromiseAction,
   resolvePromiseAction,
 } from 'redux-saga-promise-actions'
+import { call, put, takeEvery } from 'redux-saga/effects'
 import { AuthUser } from '@/features/auth'
-import { authAPI, LoginCredentialsDTO } from '../../api'
+import { ValidationErrors } from '@/types'
+import { LoginCredentialsDTO, authAPI } from '../../api'
 import { AUTH_LOGIN_FAILED, AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS } from './actionTypes'
 
 export const login = createPromiseAction(AUTH_LOGIN_REQUEST, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_FAILED)<

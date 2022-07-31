@@ -1,11 +1,10 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { PATH } from '../../path'
-import { ProtectedRoute } from '../../ProtectedRoute'
-import { mapPrivateRoutes } from './routes'
-import { mapNavbarLinks } from './navbar-links'
-
 import { DashboardLayout } from '@/components/layouts'
+import { ProtectedRoute } from '../../ProtectedRoute'
+import { PATH } from '../../path'
+import { mapNavbarLinks } from './navbar-links'
+import { mapPrivateRoutes } from './routes'
 
 export const getPrivateRoutes = (isLoggedIn: boolean, user: any) => {
   return [

@@ -1,6 +1,6 @@
-import { Anchor, Container, Title } from '@mantine/core'
 import * as React from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import { Anchor, Container, Title } from '@mantine/core'
 import { LoadingScreen } from '@/components/elements'
 
 export const AuthLayout = () => {

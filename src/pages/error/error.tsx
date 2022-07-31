@@ -1,9 +1,7 @@
 import React from 'react'
-import { Button, Container, Group, Title } from '@mantine/core'
 import { Link } from 'react-router-dom'
+import { Button, Container, Group, Title } from '@mantine/core'
 import useStyles from './error.styles'
-
-type ErrorProps = {}
 
 export const Error = () => {
   const { classes } = useStyles()

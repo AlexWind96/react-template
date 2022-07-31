@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { getUserDTO, LoginCredentialsDTO, RegisterCredentialsDTO } from './dto'
 import { AuthUser } from '@/features/auth'
+import { LoginCredentialsDTO, RegisterCredentialsDTO, getUserDTO } from './dto'
 
 class AuthAPI {
   login = async (data: LoginCredentialsDTO) => {

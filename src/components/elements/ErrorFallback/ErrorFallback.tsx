@@ -1,6 +1,6 @@
-import { Button } from '@mantine/core'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Button } from '@mantine/core'
 
 export const ErrorFallback = () => {
   const { t } = useTranslation()

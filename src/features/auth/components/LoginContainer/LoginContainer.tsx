@@ -1,10 +1,10 @@
 import React from 'react'
-import { LoginForm, LoginFormValues } from '../LoginForm'
-import { useAppDispatch } from '@/store'
 import { useNavigate } from 'react-router-dom'
-import { PATH } from '@/routes/path'
-import { login } from '../../store'
 import { Paper, Title } from '@mantine/core'
+import { PATH } from '@/routes/path'
+import { useAppDispatch } from '@/store'
+import { login } from '../../store'
+import { LoginForm, LoginFormValues } from '../LoginForm'
 
 export const LoginContainer = () => {
   const dispatch = useAppDispatch()

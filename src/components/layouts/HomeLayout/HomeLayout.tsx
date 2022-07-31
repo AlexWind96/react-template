@@ -1,9 +1,8 @@
-import { AppShell } from '@mantine/core'
 import React from 'react'
-
-import { Header } from './Header'
 import { Outlet } from 'react-router-dom'
+import { AppShell } from '@mantine/core'
 import { LoadingScreen } from '@/components/elements'
+import { Header } from './Header'
 
 export function HomeLayout() {
   return (

@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { useFromPath } from '@/hooks'
 import { Navigate, Outlet } from 'react-router-dom'
+import { useFromPath } from '@/hooks'
 import { MiddlewareType, SUBSCRIPTIONS_MIDDLEWARE } from '../routes-middlewares'
 
 type ProtectedRouteProps = {

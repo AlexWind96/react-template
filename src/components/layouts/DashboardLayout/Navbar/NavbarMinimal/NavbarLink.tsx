@@ -1,8 +1,7 @@
-import { Tooltip, UnstyledButton } from '@mantine/core'
 import React from 'react'
 import { Link, useMatch } from 'react-router-dom'
 import { Icon as TablerIcon } from 'tabler-icons-react'
-
+import { Tooltip, UnstyledButton } from '@mantine/core'
 import useStyles from './NavbarMinimal.styles'
 
 interface NavbarLinkProps {

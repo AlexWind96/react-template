@@ -1,11 +1,8 @@
-import { Anchor, Code, Group, Navbar, ScrollArea, Title } from '@mantine/core'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Logout } from 'tabler-icons-react'
-
+import { Anchor, Code, Group, Navbar, ScrollArea, Title } from '@mantine/core'
 import useStyles from './NavbarBase.styles'
-
-type NavbarBaseProps = {}
 
 export const NavbarBase = ({ data, onLogout }) => {
   const { classes, cx } = useStyles()

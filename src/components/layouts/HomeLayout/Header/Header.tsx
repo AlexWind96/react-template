@@ -1,8 +1,8 @@
-import { ColorSchemeToggle } from '@/components/elements'
-import { Anchor, Container, Group, Header as MantineHeader, Space, Title } from '@mantine/core'
 import React from 'react'
-import useStyles from './Header.styles'
 import { Link } from 'react-router-dom'
+import { Anchor, Container, Group, Header as MantineHeader, Space, Title } from '@mantine/core'
+import { ColorSchemeToggle } from '@/components/elements'
+import useStyles from './Header.styles'
 
 export const Header = ({ links }) => {
   const { classes } = useStyles()

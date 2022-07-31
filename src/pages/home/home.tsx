@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Button, Container, Overlay, Text } from '@mantine/core'
 import { Link } from 'react-router-dom'
-import useStyles from './home.styles'
+import { Button, Container, Overlay, Text } from '@mantine/core'
 import { PATH } from '@/routes/path'
+import useStyles from './home.styles'
 
 export const Home = () => {
   const { classes } = useStyles()

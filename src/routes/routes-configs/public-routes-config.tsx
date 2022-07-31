@@ -1,9 +1,8 @@
-import React from 'react'
-import { lazyImport } from '@/utils/lazyImport'
-import { Navigate } from 'react-router-dom'
-
 //Layout
+import React from 'react'
+import { Navigate } from 'react-router-dom'
 import { HomeLayout } from '@/components/layouts'
+import { lazyImport } from '@/utils/lazyImport'
 import { PATH } from '../path'
 
 //pages

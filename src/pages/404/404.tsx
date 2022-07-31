@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { Button, Container, Group, Text, Title } from '@mantine/core'
 import { Link } from 'react-router-dom'
+import { Button, Container, Group, Text, Title } from '@mantine/core'
 import useStyles from './404.styles'
 
 export const NotFound = () => {

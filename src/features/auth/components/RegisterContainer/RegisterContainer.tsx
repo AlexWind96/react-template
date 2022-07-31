@@ -1,10 +1,10 @@
 import React from 'react'
-import { useAppDispatch } from '@/store'
 import { useNavigate } from 'react-router-dom'
+import { Paper, Title } from '@mantine/core'
+import { PATH } from '@/routes/path'
+import { useAppDispatch } from '@/store'
 import { register } from '../../store'
 import { RegisterForm, RegisterFormValues } from '../RegisterForm'
-import { PATH } from '@/routes/path'
-import { Paper, Title } from '@mantine/core'
 
 export const RegisterContainer = () => {
   const dispatch = useAppDispatch()

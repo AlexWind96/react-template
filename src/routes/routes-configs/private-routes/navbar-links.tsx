@@ -1,5 +1,5 @@
-import { ROLE } from '@/features/auth'
 import { Icon, Receipt2, Settings, SwitchHorizontal, User } from 'tabler-icons-react'
+import { ROLE } from '@/features/auth'
 import { PATH } from '../../path'
 
 export type NavbarLink = {

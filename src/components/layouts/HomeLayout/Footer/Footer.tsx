@@ -1,7 +1,6 @@
-import { Container, Footer as MantineFooter, Group, Title } from '@mantine/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { Container, Group, Footer as MantineFooter, Title } from '@mantine/core'
 import useStyles from './Footer.styles'
 
 export const Footer = ({ links }) => {

@@ -1,8 +1,7 @@
-import { Center, Group, Navbar, Title, UnstyledButton } from '@mantine/core'
 import React from 'react'
-
-import { NavbarLink } from './NavbarLink'
 import { Logout } from 'tabler-icons-react'
+import { Center, Group, Navbar, Title, UnstyledButton } from '@mantine/core'
+import { NavbarLink } from './NavbarLink'
 import useStyles from './NavbarMinimal.styles'
 
 export const NavbarMinimal = ({ data, onLogout }) => {

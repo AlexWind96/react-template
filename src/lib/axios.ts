@@ -39,11 +39,13 @@ axios.interceptors.response.use(
   },
   (error) => {
     if (error.message === 'Network Error') {
+      // eslint-disable-next-line no-console
       console.log('Network Error')
     }
     if (error.response?.status) {
       switch (error.response?.status) {
         case 401:
+          // eslint-disable-next-line no-console
           console.log('Error - 401')
 
           if (window.store.getState().auth.isLoggedIn) {
@@ -52,9 +54,11 @@ axios.interceptors.response.use(
 
           break
         case 400:
+          // eslint-disable-next-line no-console
           console.log('Error - 400')
           break
         case 419:
+          // eslint-disable-next-line no-console
           console.log('Error - 419')
 
           window.store.dispatch(cleanAuthData())
@@ -63,6 +67,7 @@ axios.interceptors.response.use(
 
           break
         default:
+          // eslint-disable-next-line no-console
           console.log('Server Error')
           break
       }

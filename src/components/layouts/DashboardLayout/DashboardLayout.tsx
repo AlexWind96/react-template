@@ -1,13 +1,13 @@
-import { AppShell, Container, Drawer, ScrollArea, Stack, useMantineTheme } from '@mantine/core'
-import { useMediaQuery, useToggle } from '@mantine/hooks'
 import React from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { Header } from './Header'
-import { NavbarBase, NavbarDrawer, NavbarMinimal } from './Navbar'
+import { AppShell, Container, Drawer, ScrollArea, Stack, useMantineTheme } from '@mantine/core'
+import { useMediaQuery, useToggle } from '@mantine/hooks'
 import { LoadingScreen } from '@/components/elements'
-import { useAppDispatch } from '@/store'
 import { logout } from '@/features/auth'
 import { PATH } from '@/routes/path'
+import { useAppDispatch } from '@/store'
+import { Header } from './Header'
+import { NavbarBase, NavbarDrawer, NavbarMinimal } from './Navbar'
 
 export function DashboardLayout({ navbarLinks }) {
   const theme = useMantineTheme()

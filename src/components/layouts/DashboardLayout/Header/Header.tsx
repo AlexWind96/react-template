@@ -1,10 +1,7 @@
-import { Burger, Group, Header as MantineHeader, MediaQuery } from '@mantine/core'
 import React from 'react'
-
-import useStyles from './Header.styles'
+import { Burger, Group, Header as MantineHeader, MediaQuery } from '@mantine/core'
 import { ColorSchemeToggle } from '@/components/elements'
-
-type HeaderProps = {}
+import useStyles from './Header.styles'
 
 export const Header = ({ toggleOpen, opened }) => {
   const { classes } = useStyles()

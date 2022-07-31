@@ -1,6 +1,6 @@
-import { Group, Title } from '@mantine/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Group, Title } from '@mantine/core'
 
 export const Models = () => {
   return (
