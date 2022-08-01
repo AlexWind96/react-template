@@ -20,5 +20,3 @@ class AuthAPI {
 }
 
 export const authAPI = new AuthAPI()
-
-export type { RegisterCredentialsDTO, LoginCredentialsDTO, getUserDTO }

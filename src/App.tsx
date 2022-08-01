@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ErrorBoundary, MantineProvider, QueryProvider, StoreProvider } from '@/providers'
 import { AppRoutes } from '@/routes'
-import './lib/axios'
 
 function App() {
   return (

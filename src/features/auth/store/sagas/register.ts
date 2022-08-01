@@ -6,9 +6,10 @@ import {
   resolvePromiseAction,
 } from 'redux-saga-promise-actions'
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { AuthUser } from '@/features/auth'
 import { ValidationErrors } from '@/types'
-import { RegisterCredentialsDTO, authAPI } from '../../api'
+import { authAPI } from '../../api'
+import { RegisterCredentialsDTO } from '../../api/dto'
+import { AuthUser } from '../../types'
 import { AUTH_REGISTER_FAILED, AUTH_REGISTER_REQUEST, AUTH_REGISTER_SUCCESS } from './actionTypes'
 
 export const register = createPromiseAction(
