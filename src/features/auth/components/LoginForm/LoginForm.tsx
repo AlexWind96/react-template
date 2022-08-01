@@ -72,7 +72,7 @@ export const LoginForm = (props: LoginFormProps) => {
         error={errors.password?.message as React.ReactNode}
         mt="md"
       />
-      <Button fullWidth mt="xl" type={'submit'} disabled={isSubmitting} loading={isSubmitting}>
+      <Button fullWidth mt="xl" type={'submit'} loading={isSubmitting}>
         Sign in
       </Button>
       <Text color="dimmed" size="sm" align="center" mt={'sm'}>
