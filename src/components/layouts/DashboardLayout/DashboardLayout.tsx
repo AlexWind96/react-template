@@ -11,7 +11,7 @@ import { NavbarBase, NavbarDrawer, NavbarMinimal } from './Navbar'
 
 export function DashboardLayout({ navbarLinks }) {
   const theme = useMantineTheme()
-  const [isDrawerOpened, toggleDrawerOpened] = useToggle(false, [true, false])
+  const [isDrawerOpened, toggleDrawerOpened] = useToggle([false, true])
   const isSmallerThenMd = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`)
 
   const dispatch = useAppDispatch()
@@ -23,6 +23,7 @@ export function DashboardLayout({ navbarLinks }) {
 
   return (
     <AppShell
+      fixed={false}
       styles={{
         main: {
           background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],

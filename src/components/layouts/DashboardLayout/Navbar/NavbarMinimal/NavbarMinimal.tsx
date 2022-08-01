@@ -1,6 +1,6 @@
 import React from 'react'
 import { Logout } from 'tabler-icons-react'
-import { Center, Group, Navbar, Title, UnstyledButton } from '@mantine/core'
+import { Center, Navbar, Stack, Title, UnstyledButton } from '@mantine/core'
 import { NavbarLink } from './NavbarLink'
 import useStyles from './NavbarMinimal.styles'
 
@@ -21,16 +21,16 @@ export const NavbarMinimal = ({ data, onLogout }) => {
         <Title order={5}>LOGO</Title>
       </Center>
       <Navbar.Section grow mt={50}>
-        <Group direction="column" align="center" spacing={0}>
+        <Stack align="center" spacing={0}>
           {links}
-        </Group>
+        </Stack>
       </Navbar.Section>
       <Navbar.Section>
-        <Group direction="column" align="center" spacing={0}>
+        <Stack align="center" spacing={0}>
           <UnstyledButton className={classes.link} onClick={onLogout}>
             <Logout />
           </UnstyledButton>
-        </Group>
+        </Stack>
       </Navbar.Section>
     </Navbar>
   )
