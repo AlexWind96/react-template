@@ -1,9 +1,7 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import configureStore from '@/store/store'
-
-const { store, persistor } = configureStore()
+import { persistor, store } from '@/store'
 
 export function StoreProvider({ children }) {
   return (
